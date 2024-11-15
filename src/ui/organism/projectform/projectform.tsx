@@ -3,36 +3,39 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { IProjectRequest } from "@/app/core/application/dto/projects/projects-request.dto";
+import { IVehicleRequest } from "@/app/core/application/dto/gestion/gestion-request.dto";  
 import { FormField } from "@/ui/molecule/common/FormField";
 import { yupResolver } from "@hookform/resolvers/yup";
-import styles from './projectform.module.scss';
+import styles from './vehicleform.module.scss'; 
 import Title from "@/ui/atoms/title/Title";
 import { Button } from "@/ui/atoms/botton/botton";
-import { IGetProjectsResponseID } from "@/app/core/application/dto/projects/projects-response.dto";
+import { IGetVehicleResponseID } from "@/app/core/application/dto/gestion/gestion-response.dto";  
 
 interface IProps {
     closeModal: () => void;
-    projectID?: number;
+    vehicleID?: number;  
 }
 
-const projectSchema = yup.object().shape({
-    title: yup
+const vehicleSchema = yup.object().shape({
+    make: yup
         .string()
-        .required('El título del proyecto es requerido'),
-    description: yup
+        .required('La marca del vehículo es requerida'),
+    model: yup
         .string()
-        .required('La descripción del proyecto es requerida'),
-    startDate: yup
-        .date()
-        .required('La fecha de inicio es requerida'),
-    endDate: yup
-        .date()
-        .required('La fecha de fin es requerida')
-})
+        .required('El modelo del vehículo es requerido'),
+    year: yup
+        .number()
+        .required('El año del vehículo es requerido')
+        .min(1900, 'El año debe ser mayor a 1900'),
+    licensePlate: yup
+        .string()
+        .required('La matrícula del vehículo es requerida'),
+    photo: yup
+        .string()
+        .url('La foto debe ser una URL válida'),
+});
 
-
-const ProjectForm = ({ projectID, closeModal }: IProps) => {
+const VehicleForm = ({ vehicleID, closeModal }: IProps) => {
     const router = useRouter();
 
     const {
@@ -40,114 +43,120 @@ const ProjectForm = ({ projectID, closeModal }: IProps) => {
         handleSubmit,
         formState: { errors },
         setValue
-
-    } = useForm<IProjectRequest>({
+    } = useForm<IVehicleRequest>({
         mode: "onChange",
         reValidateMode: "onChange",
-        resolver: yupResolver(projectSchema),
-    })
-// aca es donde se crea o se edita
+        resolver: yupResolver(vehicleSchema),
+    });
+
+    // Cargar los datos del vehículo cuando se edita
     useEffect(() => {
-        if (projectID) {
-            const fetchProjectID = async () => {
+        if (vehicleID) {
+            const fetchVehicle = async () => {
                 try {
-                    const response = await fetch(`/api/projects/get/${projectID}`);
-                    const data : IGetProjectsResponseID = await response.json();
+                    const response = await fetch(`/api/vehicles/get/${vehicleID}`);
+                    const data: IGetVehicleResponseID = await response.json();
 
-                    const startDate = new Date(data.data.startDate).toISOString().split('T')[0];
-                    const endDate = new Date(data.data.endDate).toISOString().split('T')[0];
-                    
-                    setValue('title', data.data.title);
-                    setValue('description', data.data.description);
-                    setValue('startDate', startDate as any);
-                    setValue('endDate', endDate as any);
+                    const vehicle = data.data;  // Ajustamos el tipo de datos a vehículo
 
-                
-
+                    setValue('make', vehicle.make);
+                    setValue('model', vehicle.model);
+                    setValue('year', vehicle.year);
+                    setValue('licensePlate', vehicle.licensePlate);
+                    setValue('photo', vehicle.file || '');
                 } catch (error) {
                     console.log(error);
                 }
-            }
+            };
 
-            fetchProjectID();
+            fetchVehicle();
         }
-    }, [projectID])
+    }, [vehicleID, setValue]);
 
-
-    const handleProject = async (data: IProjectRequest) => {
-        if (projectID) {
-            const response = await fetch(`/api/projects/update/${projectID}`, {
+    // Manejo de creación o actualización de vehículos
+    const handleVehicle = async (data: IVehicleRequest) => {
+        if (vehicleID) {
+            // Actualizar vehículo
+            const response = await fetch(`/api/vehicles/update/${vehicleID}`, {
                 method: 'PATCH',
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
 
-            console.log('Actualizado');
-
-            if (!response) {
-                console.log('Error el enviar el formulario :(');
+            if (response.ok) {
+                console.log('Vehículo actualizado');
+            } else {
+                console.log('Error al actualizar el vehículo');
             }
-
         } else {
-            const response = await fetch('/api/projects/create', {
+            // Crear vehículo
+            const response = await fetch('/api/vehicles/create', {
                 method: 'POST',
-                body: JSON.stringify(data)
-            })
+                body: JSON.stringify(data),
+            });
 
-            if (!response) {
-                console.log('Error el enviar el formulario :(');
+            if (response.ok) {
+                console.log('Vehículo creado');
+            } else {
+                console.log('Error al crear el vehículo');
             }
         }
 
         router.refresh();
         closeModal();
-    }
-
-
+    };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(handleProject)}>
-            <Title level={2} className={styles.title}>Proyectos</Title>
+        <form className={styles.form} onSubmit={handleSubmit(handleVehicle)}>
+            <Title level={2} className={styles.title}>Vehículo</Title>
 
-            <FormField<IProjectRequest>
+            <FormField<IVehicleRequest>
                 control={control}
                 type="text"
-                label="Título"
-                name="title"
-                error={errors.title}
-                placeholder="Ingresa el título del proyecto"
+                label="Marca"
+                name="make"
+                error={errors.make}
+                placeholder="Ingresa la marca del vehículo"
             />
 
-            <FormField<IProjectRequest>
+            <FormField<IVehicleRequest>
                 control={control}
                 type="text"
-                label="Descripción"
-                name="description"
-                error={errors.description}
-                placeholder="Ingresa la decripción del proyecto"
+                label="Modelo"
+                name="model"
+                error={errors.model}
+                placeholder="Ingresa el modelo del vehículo"
             />
 
-            <FormField<IProjectRequest>
+            <FormField<IVehicleRequest>
                 control={control}
-                type="date"
-                label="Fecha inicio"
-                name="startDate"
-                error={errors.startDate}
-                placeholder="Ingresa la fecha de inicio del proyecto"
+                type="number"
+                label="Año"
+                name="year"
+                error={errors.year}
+                placeholder="Ingresa el año del vehículo"
             />
 
-            <FormField<IProjectRequest>
+            <FormField<IVehicleRequest>
                 control={control}
-                type="date"
-                label="Fecha fin"
-                name="endDate"
-                error={errors.startDate}
-                placeholder="Ingresa la fecha de fin del proyecto"
+                type="text"
+                label="Matrícula"
+                name="licensePlate"
+                error={errors.licensePlate}
+                placeholder="Ingresa la matrícula del vehículo"
+            />
+
+            <FormField<IVehicleRequest>
+                control={control}
+                type="text"
+                label="Foto"
+                name="photo"
+                error={errors.photo}
+                placeholder="Ingresa la URL de la foto del vehículo"
             />
 
             <Button className="primary-big" type="submit">Enviar</Button>
-
         </form>
-    )
-}
+    );
+};
 
-export default ProjectForm;
+export default VehicleForm;

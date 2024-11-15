@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { ProjectService } from "@/app/infraestructure/services/project.services";
+import { VehicleService } from "@/app/infraestructure/services/project.services";
 
 export async function DELETE(_: Request, {params} : {params: Promise<{id: number}>}) {
-    const client = new ProjectService();
+    const client = new VehicleService();
 
     try {
         const id = (await params).id

@@ -1,19 +1,20 @@
 import { HttpClient } from "@/app/infraestructure/untils/client-http";
-import { Datum, IGetProjectsResponse } from "@/app/core/application/dto/gestion/gestion-response.dto";
-import { IProjectRequest } from "@/app/core/application/dto/gestion/gestion-request.dto";
+import { IVehicle, IGetVehiclesResponse } from "@/app/core/application/dto/gestion/gestion-response.dto";
+import { IVehicleRequest } from "@/app/core/application/dto/gestion/gestion-request.dto";
 
+const name = "vehicles";  // Nombre del endpoint
 
-const name ="vehicles"  // tener en cuenta esto es el nombre (de lo que se tiene en postman para manejar el endpoint)
-export class ProjectService{
+export class VehicleService {
     private httpClient: HttpClient;
 
     constructor() {
         this.httpClient = new HttpClient();
     }
 
-    async find(page: number, size: number): Promise<IGetProjectsResponse> {
+    // Obtener la lista de vehículos con paginación
+    async find(page: number, size: number): Promise<IGetVehiclesResponse> {
         try {
-            const response = await this.httpClient.get<IGetProjectsResponse>(`${name}?page=${page}&size=${size}`);
+            const response = await this.httpClient.get<IGetVehiclesResponse>(`${name}?page=${page}&size=${size}`);
             return response;
         } catch (error) {
             console.log(error);
@@ -21,48 +22,46 @@ export class ProjectService{
         }
     }
 
-    async findById(id: number): Promise<Datum> {
+    // Obtener un vehículo por ID
+    async findById(id: number): Promise<IVehicle> {
         try {
-            const response = await this.httpClient.get<Datum>(`${name}/${id}`);
+            const response = await this.httpClient.get<IVehicle>(`${name}/${id}`);
             return response;
-            
         } catch (error) {
             console.log(error);
             throw error;
         }
     }
 
-    async create(body: IProjectRequest) {
+    // Crear un nuevo vehículo
+    async create(body: IVehicleRequest) {
         try {
-            const response = this.httpClient.post<IGetProjectsResponse, IProjectRequest>(`${name}`, body);
+            const response = this.httpClient.post<IGetVehiclesResponse, IVehicleRequest>(`${name}`, body);
             return response;
         } catch (error) {
             console.log(error);
         }
     }
 
-    async put(id: number, body: IProjectRequest) {
-		try {
-			const response = this.httpClient.put<Datum, IProjectRequest>(`${name}/${id}`, body);
-			return response;
+    // Actualizar los detalles de un vehículo existente
+    async put(id: number, body: IVehicleRequest) {
+        try {
+            const response = this.httpClient.put<IVehicle, IVehicleRequest>(`${name}/${id}`, body);
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 
-		} catch (error) {
-			console.log(error);
-			throw error;
-		}
-	}
-    
-
-    async destroy(id: number){
+    // Eliminar un vehículo
+    async destroy(id: number) {
         try {
             const response = await this.httpClient.delete(`${name}/${id}`);
             return response;
-
         } catch (error) {
             console.log(error);
             throw error;
         }
     }
-
-
 }

@@ -3,16 +3,15 @@
 
 
 .nav {
-  @include box-shadow();
+
   margin-left: 17%;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $color-primary;
+
   height: 70px;
-  
-    .inputsContainer {
+.inputsContainer {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -46,5 +45,5 @@
           }
       }
   }
+
 }
-    

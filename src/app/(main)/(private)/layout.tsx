@@ -3,7 +3,7 @@ import React from 'react'
 import AuthGuard from './guard/AuthGuard'
 import Navbar from '@/ui/organism/nav/navbar';
 import SidebarItems from '@/ui/organism/sidebar/sidebar';
-
+import Car from '@/ui/organism/addCar/Newcar';
 
 export default function PrivateLayout(
     { children }: { children: React.ReactNode}
@@ -13,7 +13,7 @@ export default function PrivateLayout(
       <AuthGuard>
       <SidebarItems />
       <Navbar />
-      
+      <Car />
       {children}
       </AuthGuard>
     </div>

@@ -1,56 +1,58 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { IGetProjectsResponse } from "@/app/core/application/dto/gestion/gestion-response.dto";
-import { ProjectService } from "@/app/infraestructure/services/project.services";
+import { IGetVehiclesResponse } from "@/app/core/application/dto/gestion/gestion-response.dto";
 import styles from './table.module.scss';
 import Table from '@/ui/molecule/table/table';
 import { Button } from "@/ui/atoms";
 import PaginationProjects from "../paginations/ServicesPagination";
 
-interface TableProjectsProps {
-    dataResponse: IGetProjectsResponse;
+interface TableVehiclesProps {
+    dataResponse: IGetVehiclesResponse;
     onEdit: (id: number) => void;
 }
 
-const TableProjects: React.FC<TableProjectsProps> = ({ dataResponse, onEdit }) => {
+const TableVehicles: React.FC<TableVehiclesProps> = ({ dataResponse, onEdit }) => {
     const router = useRouter();
     const { data } = dataResponse;
 
+    // Handler para eliminar el vehículo
     const handleDelete = async (id: number) => {
-        const confirmDelete = confirm("¿Estás seguro de que deseas eliminar este proyecto?");
+        const confirmDelete = confirm("¿Estás seguro de que deseas eliminar este vehículo?");
         if (!confirmDelete) return;
 
         try {
-            await fetch(`/api/projects/delete/${id}`, {
+            await fetch(`/api/vehicles/delete/${id}`, {
                 method: "DELETE",
             });
-            alert("Proyecto eliminado correctamente");
+            alert("Vehículo eliminado correctamente");
 
             router.refresh();
         } catch (error) {
-            console.error("Error al eliminar el proyecto", error);
+            console.error("Error al eliminar el vehículo", error);
         }
     };
 
+    // Encabezados de las columnas para la tabla
     const headers = [
-        { label: "foto", key: "file" },
-        { label: "marca", key: "make" },
-        { label: "modelo", key: "model" },
-        { label: "año", key: "year" },
-        { label: "Organizador", key: "organizer" },
-        { label: "Acciones", key: "actions" }
+        { label: "Foto", key: "photo" },  // Cambié "file" a "photo"
+        { label: "Marca", key: "make" },
+        { label: "Modelo", key: "model" },
+        { label: "Año", key: "year" },
+        { label: "Placa", key: "licensePlate" },
+        { label: "Acciones", key: "actions" },
     ];
 
-    const formatedData = data.map((project) => ({
-        image: project.file,   // Aquí asumo que el proyecto tiene una propiedad `image` para la foto
-        title: project.make,   // Marca
-        modelo: project.model, // Modelo
-        año: project.year,     // Año
-        organizer: project.organizer?.name || 'Sin organizador', // Organizador (con manejo de null o undefined)
+    // Formateo de los datos para la tabla
+    const formatedData = data.map((vehicle) => ({
+        photo: vehicle.photo,        // La foto es ahora `photo`
+        make: vehicle.make,          // Marca
+        model: vehicle.model,        // Modelo
+        year: vehicle.year,          // Año
+        licensePlate: vehicle.licensePlate, // Placa
         actions: (
             <div className={styles.actions}>
-                <Button className="secondary-border" onClick={() => onEdit(project.id)}>Editar</Button>
-                <Button className="delete" onClick={() => handleDelete(project.id)}>Eliminar</Button>
+                <Button className="secondary-border" onClick={() => onEdit(vehicle.id)}>Editar</Button>
+                <Button className="delete" onClick={() => handleDelete(vehicle.id)}>Eliminar</Button>
             </div>
         ),
     }));
@@ -63,4 +65,4 @@ const TableProjects: React.FC<TableProjectsProps> = ({ dataResponse, onEdit }) =
     );
 };
 
-export default TableProjects;
+export default TableVehicles;

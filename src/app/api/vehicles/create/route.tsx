@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { ProjectService } from "@/app/infraestructure/services/project.services";
-import { IProjectRequest } from "@/app/core/application/dto/projects/projects-request.dto";
+import { VehicleService } from "@/app/infraestructure/services/project.services";
+import { IVehicleRequest } from "@/app/core/application/dto/gestion/gestion-request.dto";
 
 export async function POST(request: Request) {
-    const service = new ProjectService();
+    const service = new VehicleService();
 
     try {
-        const body: IProjectRequest = await request.json();
+        const body: IVehicleRequest = await request.json();
         const response = await service.create(body);
 
         return NextResponse.json(response, {status: 200});

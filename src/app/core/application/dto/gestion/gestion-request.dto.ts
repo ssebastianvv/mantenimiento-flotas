@@ -1,7 +1,7 @@
-
-export interface IProjectRequest {
-    title:       string;
-    description: string;
-    startDate:   Date;
-    endDate:     Date;
+export interface IVehicleRequest {
+    make: string;
+    model: string;
+    year: number;
+    licensePlate: string;
+    photo?: string;
 }

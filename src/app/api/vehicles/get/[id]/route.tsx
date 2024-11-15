@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { ProjectService } from "@/app/infraestructure/services/project.services";
+import { VehicleService } from "@/app/infraestructure/services/project.services";
 
 export async function GET( request: Request, {params} : {params: Promise<{id: number}>}){
-    const service = new ProjectService();
+    const service = new VehicleService();
 
     try {
         const id = (await params).id

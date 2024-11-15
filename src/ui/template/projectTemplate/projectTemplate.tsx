@@ -1,5 +1,5 @@
 "use client";
-import { IGetProjectsResponse } from "@/app/core/application/dto/projects/projects-response.dto";
+import { IGetVehiclesResponse } from "@/app/core/application/dto/gestion/gestion-response.dto";
 import TableProjects from "@/ui/organism/table/table";
 import styles from './template.module.scss';
 import { useState } from "react";
@@ -10,7 +10,7 @@ import ProjectForm from "@/ui/organism/projectform/projectform";
 
 
 interface IProps {
-    dataResponse: IGetProjectsResponse;
+    dataResponse: IGetVehiclesResponse;
 }
 
 const ProjectsPageTemplate: React.FC<IProps> = ({ dataResponse }) => {
@@ -35,7 +35,7 @@ const ProjectsPageTemplate: React.FC<IProps> = ({ dataResponse }) => {
             <TableProjects dataResponse={dataResponse} onEdit={handleEdit}></TableProjects>
 
             <Modal isVisible={isModalOpen} onClose={closeModal}>
-                <ProjectForm closeModal={closeModal} projectID={projectID}/>
+                <ProjectForm closeModal={closeModal} vehicleID={projectID}/>
             </Modal>
         </div>
     )
