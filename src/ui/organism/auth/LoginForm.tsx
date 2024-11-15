@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import {Button} from "../../atoms";
 import Title from "../../atoms/title/Title";
 import styles from './login.module.scss';
+import Paragraph from "@/ui/atoms/paragraph/Paragraph";
+import { icons } from "../../atoms";
 
 const loginSchema = yup.object().shape({
     email: yup
@@ -80,16 +82,22 @@ const LoginForm = () => {
 
     return (
         <div className={styles.containerForm}>
-            <form onSubmit={handleSubmit(handleLogin)}>
-                <Title className={styles.title} level={2}>Iniciar sesión</Title>
-                
+            <div className={styles.headerForm}>
+                <span className={styles.icon}>{icons.car}</span>
+                <Title className={styles.title} level={2}>Transport Solution S.A</Title>
+                <div className={styles.description}>
+                    <Paragraph classname={styles.paragraph}>Inicia sesión en tu cuenta y gestiona tu flota de vehículos</Paragraph>
+                </div>
+            </div>
+
+            <form className={styles.form} onSubmit={handleSubmit(handleLogin)}>
                 <FormField<ILoginRequest>
                     control={control}
                     type="email"
                     label="Correo electrónico"
                     name="email"
                     error={errors.email}
-                    placeholder="Ingresa tu correo"
+                    placeholder="Ingresa tu correo electrónico"
                 />
 
                 <FormField<ILoginRequest>
@@ -101,10 +109,17 @@ const LoginForm = () => {
                     placeholder="Ingresa tu contraseña"
                 />
 
-                <Button className="primary" type="submit">Iniciar sesión</Button>
+                <div className={styles.containerButton}>
+                    <Button className="primary-icons" type="submit">{icons.lock} Iniciar sesión</Button>
+                </div>
+
             </form>
+            <div className={styles.footerForm}>
+                <Paragraph>¿Problemas para iniciar sesión? Contacta al administrador del sistema</Paragraph>
+            </div>
         </div>
-    );
-};
+
+    )
+}
 
 export default LoginForm;

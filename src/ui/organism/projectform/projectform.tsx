@@ -63,7 +63,7 @@ const VehicleForm = ({ vehicleID, closeModal }: IProps) => {
                     setValue('model', vehicle.model);
                     setValue('year', vehicle.year);
                     setValue('licensePlate', vehicle.licensePlate);
-                    setValue('photo', vehicle.file || '');
+                    setValue('photo', vehicle.photo || '');
                 } catch (error) {
                     console.log(error);
                 }

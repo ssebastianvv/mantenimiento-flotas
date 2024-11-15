@@ -5,6 +5,7 @@ import styles from './table.module.scss';
 import Table from '@/ui/molecule/table/table';
 import { Button } from "@/ui/atoms";
 import PaginationProjects from "../paginations/ServicesPagination";
+import { icons } from "@/ui/atoms";
 
 interface TableVehiclesProps {
     dataResponse: IGetVehiclesResponse;
@@ -44,15 +45,16 @@ const TableVehicles: React.FC<TableVehiclesProps> = ({ dataResponse, onEdit }) =
 
     // Formateo de los datos para la tabla
     const formatedData = data.map((vehicle) => ({
-        photo: vehicle.photo,        // La foto es ahora `photo`
-        make: vehicle.make,          // Marca
-        model: vehicle.model,        // Modelo
-        year: vehicle.year,          // Año
-        licensePlate: vehicle.licensePlate, // Placa
+        photo: vehicle.photo,        
+        make: vehicle.make,          
+        model: vehicle.model,       
+        year: vehicle.year,          
+        licensePlate: vehicle.licensePlate, 
         actions: (
             <div className={styles.actions}>
-                <Button className="secondary-border" onClick={() => onEdit(vehicle.id)}>Editar</Button>
-                <Button className="delete" onClick={() => handleDelete(vehicle.id)}>Eliminar</Button>
+                <Button className="secondary-border" onClick={() => onEdit(vehicle.id)}>{icons.pencil}</Button>
+                <Button className="delete" onClick={() => handleDelete(vehicle.id)}>{icons.trash}</Button>
+                <Button className="more" onClick={() => (vehicle.id)}>{icons.search}</Button>
             </div>
         ),
     }));

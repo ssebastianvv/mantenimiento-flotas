@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins.scss';
+
+.card{
+    @include border-radius(0.5rem);
+    margin-top: 1rem;
+    background-color: $color-primary;
+    border: 0.1rem solid $color-border;
+    width: 23%;
+    height: 6rem;
+    padding: 1rem;
+
+    .headerCard{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

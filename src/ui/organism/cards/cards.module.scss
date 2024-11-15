@@ -1,0 +1,22 @@
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filterItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.filterActions {
+    display: flex;
+    gap: 10px;
+}
+
+.containerPanel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}

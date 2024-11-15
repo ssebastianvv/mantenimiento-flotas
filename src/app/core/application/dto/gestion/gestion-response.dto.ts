@@ -11,7 +11,7 @@ export interface IVehicle {
     model: string;
     year: number; 
     licensePlate: string;
-    file?: string; 
+    photo?: string;
 }
 
 export interface Metadata {

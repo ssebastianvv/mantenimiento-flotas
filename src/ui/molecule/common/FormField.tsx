@@ -17,6 +17,7 @@ interface IPropsFormField<T extends FieldValues> {
   error?: FieldError;
   id?: string;
   placeholder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; 
 }
 
 export const FormField = <T extends FieldValues>({

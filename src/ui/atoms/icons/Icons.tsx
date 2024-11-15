@@ -9,12 +9,13 @@ import { FaUserAstronaut } from "react-icons/fa6";
 import { GiExitDoor } from "react-icons/gi";
 import { FaFileDownload } from "react-icons/fa";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaCar } from "react-icons/fa";
+import { TbLockSquare } from "react-icons/tb";
 
 
 
 export const icons = {
     search: < IoSearch />,
-    suitcase: <FaSuitcase />,
     companie: <LuBuilding />,
     pencil: <GoPencil />,
     trash: <FaRegTrashAlt />,
@@ -25,4 +26,6 @@ export const icons = {
     download:<FaFileDownload />,
     next:<FaChevronRight />,
     previous:<FaChevronLeft />,
+    car:<FaCar />,
+    lock:<TbLockSquare />,
 }

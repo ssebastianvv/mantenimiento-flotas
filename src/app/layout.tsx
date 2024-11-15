@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "../styles/globals.scss";
 import { AuthProvider } from "./auth-provider";
 
