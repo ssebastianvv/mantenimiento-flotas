@@ -1,0 +1,86 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins.scss';
+
+.container {
+    width: 80%; 
+    margin: 0 auto;
+
+    .containerDescription{
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        padding: 1rem;
+        width: 60%;
+        margin: 0 auto;
+
+        .paragraph {
+            margin-left: 1rem;
+            width: 100%;
+        }
+    }
+    .containerTitle {
+       
+        display: flex;
+        align-items: center;
+        // background-color: aliceblue;
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    .containerBanner {
+        display: flex; 
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 5rem;
+
+        .banner {
+            flex: 0 1 29%;
+            @include border-radius(0.5rem);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            padding: 2rem 1.5rem 4rem;
+            margin: 1rem; 
+
+            .img {
+                @include border-radius(0.5rem);
+                width: 100%; 
+            }
+        }
+    }
+    .buttonsContainer {
+        display: flex;
+        gap: 16px;  // Espacio entre los botones
+    }
+    
+    /* Estilo para los botones */
+    .button2 {
+        padding: 10px 20px;
+        background-color: #ffffff;  // Color de fondo azul
+        color: rgb(7, 7, 7);
+        border-radius: 8px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    
+    }
+    .button1 {
+        padding: 10px 20px;
+        background-color: #000000;  // Color de fondo azul
+        color: white;
+        border-radius: 8px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    
+    //     &:hover {
+    //         background-color: #2563eb;  
+    //         transform: translateY(-2px);  
+    //     }
+    
+    //     &:active {
+    //         background-color: #1e40af;  
+    //     }
+     }
+}    

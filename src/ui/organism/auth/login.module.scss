@@ -1,0 +1,55 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins.scss";
+
+
+.containerForm {
+  margin: 5% auto;
+  width: 36%;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $color-primary;
+
+  .form {
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+  }
+
+  .headerForm {
+      text-align: center;
+
+      .icon {
+          color: $color-secondary;
+          font-size: 3rem;
+      }
+
+      .title {
+          font-weight: bold;
+          color: $color-secondary;
+      }
+
+      .paragraph {
+          text-align: left;
+          margin: 1.5rem 0;
+          font-weight: 600;
+      }
+  }
+
+  .footerForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: bold;
+      margin: 1.5rem 0;
+      font-size: 1rem;
+  }
+
+  .containerButton {
+      display: flex;
+      justify-content: center;
+      margin-top: auto;
+  }
+}

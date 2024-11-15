@@ -1,0 +1,48 @@
+/* header.module.scss */
+
+/* Estilo general del header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #f1f5f9;  // Color de fondo suave (gris claro)
+}
+
+/* Estilo para el título de la empresa */
+.title {
+    font-size: 2rem;  // Tamaño del texto (equivalente a text-3xl de Tailwind)
+    font-weight: bold;
+    color: #1d4ed8;  // Color azul (puedes usar un color específico de tu paleta)
+}
+
+/* Contenedor de los botones */
+.buttonsContainer {
+    display: flex;
+    gap: 16px;  // Espacio entre los botones
+}
+
+/* Estilo para los botones */
+.button1 {
+    padding: 10px 20px;
+    background-color: #ffffff;  // Color de fondo azul
+    color: rgb(7, 7, 7);
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+   
+}
+.button2 {
+    padding: 10px 20px;
+    background-color: #000000;  // Color de fondo azul
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+}

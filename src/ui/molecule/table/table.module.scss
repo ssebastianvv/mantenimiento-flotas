@@ -1,0 +1,99 @@
+
+.tableContainer {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  
+  .table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-left: 18%;
+    font-size: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    
+  }
+  
+  .headerCell {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .cell {
+    padding: 12px 15px;
+    text-align: left;
+    color: #555;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .row {
+    transition: background-color 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: #f9f9f9;
+    }
+  }
+  
+  .cell span {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .active {
+    color: #28a745;
+    font-weight: bold;
+  }
+  
+  .inactive {
+    color: #dc3545;
+    font-weight: bold;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  
+    .secondary-border {
+      background-color: transparent;
+      border: 1px solid #007bff;
+      color: #007bff;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+    }
+  
+    .delete {
+      background-color: transparent;
+      border: 1px solid #dc3545;
+      color: #dc3545;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #dc3545;
+        color: #fff;
+      }
+    }
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
