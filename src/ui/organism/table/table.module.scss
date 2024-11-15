@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins.scss';
+
+
+.actions{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.active{
+    @include border-radius(0.2rem);
+    background-color: $color-green-ligth;
+    color: $color-green-dark;
+    padding: 0.2rem 0.4rem;
+    font-weight: 700;
+
+}
