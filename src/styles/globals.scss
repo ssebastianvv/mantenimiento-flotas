@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+html{
+    font-size: 16px;
+}
+
+body {
+    overflow-y: scroll;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #cfe4fb, #ffff);
+}
+
+
